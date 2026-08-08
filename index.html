@@ -63,24 +63,23 @@
   }
   .ambient-smoke .wisp{
     position:absolute;
-    bottom:-5%;
-    width:28px;
-    height:130px;
-    background:linear-gradient(to top, rgba(238,231,218,0) 0%, rgba(238,231,218,0.65) 28%, rgba(238,231,218,0.42) 60%, rgba(238,231,218,0) 100%);
+    bottom:-8%;
+    width:34px;
+    height:34px;
     border-radius:50%;
-    filter:blur(8px);
+    background:radial-gradient(circle, rgba(238,231,218,0.6) 0%, rgba(238,231,218,0) 72%);
+    filter:blur(6px);
     opacity:0;
-    animation-name:steam-rise;
-    animation-timing-function:ease-in-out;
+    animation-name:ambient-puff-rise;
+    animation-timing-function:ease-out;
     animation-iteration-count:infinite;
   }
-  @keyframes steam-rise{
-    0%{ transform:translate(0,0) scale(1,1); opacity:0; filter:blur(8px); }
+  @keyframes ambient-puff-rise{
+    0%{ transform:translate(0,0) scale(0.5); opacity:0; filter:blur(6px); }
     10%{ opacity:var(--peak-opacity, 0.38); }
-    25%{ transform:translate(calc(var(--drift, 30px) * 0.35), -18vh) scale(1.1,1.05); filter:blur(9px); }
-    50%{ opacity:calc(var(--peak-opacity, 0.38) * 0.7); transform:translate(calc(var(--drift, 30px) * -0.25), -37vh) scale(1.45,1.12); filter:blur(12px); }
-    75%{ opacity:calc(var(--peak-opacity, 0.38) * 0.32); transform:translate(calc(var(--drift, 30px) * 0.45), -56vh) scale(1.9,1.2); filter:blur(16px); }
-    100%{ transform:translate(var(--drift, 30px), -76vh) scale(2.4,1.28); opacity:0; filter:blur(20px); }
+    40%{ transform:translate(calc(var(--drift, 30px) * 0.4), -30vh) scale(1.3); filter:blur(9px); }
+    70%{ opacity:calc(var(--peak-opacity, 0.38) * 0.55); transform:translate(calc(var(--drift, 30px) * 0.7), -55vh) scale(2); filter:blur(13px); }
+    100%{ transform:translate(var(--drift, 30px), -76vh) scale(2.6); opacity:0; filter:blur(17px); }
   }
   @media (prefers-reduced-motion:reduce){
     .ambient-smoke{ display:none; }
@@ -711,16 +710,16 @@
 <div class="mockup-tag">Concept homepage — for review with Stir and Mixxes · not the live site</div>
 
 <div class="ambient-smoke" aria-hidden="true">
-  <div class="wisp" style="left:3%; width:30px; height:135px; animation-duration:14s; animation-delay:-2s; --drift:70px; --peak-opacity:0.42;"></div>
-  <div class="wisp" style="left:11%; width:24px; height:110px; animation-duration:11s; animation-delay:-6s; --drift:-50px; --peak-opacity:0.34;"></div>
-  <div class="wisp" style="left:22%; width:38px; height:165px; animation-duration:17s; animation-delay:-10s; --drift:40px; --peak-opacity:0.46;"></div>
-  <div class="wisp" style="left:34%; width:26px; height:118px; animation-duration:12s; animation-delay:-3s; --drift:-65px; --peak-opacity:0.3;"></div>
-  <div class="wisp" style="left:45%; width:32px; height:145px; animation-duration:15s; animation-delay:-8s; --drift:55px; --peak-opacity:0.4;"></div>
-  <div class="wisp" style="left:56%; width:22px; height:100px; animation-duration:10s; animation-delay:-1s; --drift:-42px; --peak-opacity:0.32;"></div>
-  <div class="wisp" style="left:66%; width:36px; height:160px; animation-duration:16s; animation-delay:-12s; --drift:60px; --peak-opacity:0.44;"></div>
-  <div class="wisp" style="left:76%; width:28px; height:125px; animation-duration:13s; animation-delay:-5s; --drift:-48px; --peak-opacity:0.35;"></div>
-  <div class="wisp" style="left:86%; width:34px; height:150px; animation-duration:14.5s; animation-delay:-9s; --drift:58px; --peak-opacity:0.4;"></div>
-  <div class="wisp" style="left:94%; width:24px; height:112px; animation-duration:11.5s; animation-delay:-4s; --drift:-38px; --peak-opacity:0.3;"></div>
+  <div class="wisp" style="left:3%; width:30px; height:30px; animation-duration:14s; animation-delay:-2s; --drift:70px; --peak-opacity:0.42;"></div>
+  <div class="wisp" style="left:11%; width:22px; height:22px; animation-duration:11s; animation-delay:-6s; --drift:-50px; --peak-opacity:0.34;"></div>
+  <div class="wisp" style="left:22%; width:40px; height:40px; animation-duration:17s; animation-delay:-10s; --drift:40px; --peak-opacity:0.46;"></div>
+  <div class="wisp" style="left:34%; width:24px; height:24px; animation-duration:12s; animation-delay:-3s; --drift:-65px; --peak-opacity:0.3;"></div>
+  <div class="wisp" style="left:45%; width:32px; height:32px; animation-duration:15s; animation-delay:-8s; --drift:55px; --peak-opacity:0.4;"></div>
+  <div class="wisp" style="left:56%; width:20px; height:20px; animation-duration:10s; animation-delay:-1s; --drift:-42px; --peak-opacity:0.32;"></div>
+  <div class="wisp" style="left:66%; width:38px; height:38px; animation-duration:16s; animation-delay:-12s; --drift:60px; --peak-opacity:0.44;"></div>
+  <div class="wisp" style="left:76%; width:26px; height:26px; animation-duration:13s; animation-delay:-5s; --drift:-48px; --peak-opacity:0.35;"></div>
+  <div class="wisp" style="left:86%; width:34px; height:34px; animation-duration:14.5s; animation-delay:-9s; --drift:58px; --peak-opacity:0.4;"></div>
+  <div class="wisp" style="left:94%; width:22px; height:22px; animation-duration:11.5s; animation-delay:-4s; --drift:-38px; --peak-opacity:0.3;"></div>
 </div>
 
 <header class="site">
