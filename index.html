@@ -53,6 +53,15 @@
   }
   ::selection{ background:var(--gold); color:var(--ink); }
 
+  html{
+    scrollbar-color:var(--gold) var(--charcoal);
+    scrollbar-width:thin;
+  }
+  ::-webkit-scrollbar{ width:12px; height:12px; }
+  ::-webkit-scrollbar-track{ background:var(--charcoal); }
+  ::-webkit-scrollbar-thumb{ background:var(--gold); border:3px solid var(--charcoal); border-radius:7px; }
+  ::-webkit-scrollbar-thumb:hover{ background:var(--gold-soft); }
+
   .ambient-smoke{
     position:fixed;
     left:0;
@@ -473,7 +482,7 @@
   .jar-card h3{ font-size:1.05rem; color:var(--wax-cream); }
   .jar-card .tag{ font-family:var(--utility); font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold-soft); margin:0.35rem 0 0.5rem; }
   .jar-card p{ display:none; }
-  .jar-card .price{ font-family:var(--utility); font-size:0.7rem; letter-spacing:0.06em; color:var(--wax-cream); margin:0 0 0.6rem; }
+  .jar-card .price{ font-family:var(--utility); font-size:0.7rem; letter-spacing:0.06em; color:var(--wax-cream); margin:0 0 0.6rem; font-variant-numeric:tabular-nums; }
   .jar-card a.explore{ font-family:var(--utility); font-size:0.62rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--wax-cream); border-bottom:1px solid var(--gold); padding-bottom:0.15rem; transition:color .2s ease, border-color .2s ease; }
   .jar-card a.explore:hover{ color:var(--gold-soft); border-color:var(--gold-soft); }
 
@@ -605,6 +614,7 @@
     font-family:var(--body);
     font-size:1rem;
     padding:0.4rem 0.2rem;
+    caret-color:var(--gold-soft);
   }
   .newsletter input:focus-visible{ outline-offset:5px; }
   .newsletter input::placeholder{ color:var(--smoke); }
@@ -703,6 +713,7 @@
     letter-spacing:0.06em;
     color:var(--smoke);
     margin:0;
+    font-variant-numeric:tabular-nums;
   }
 
   .footer-base{
