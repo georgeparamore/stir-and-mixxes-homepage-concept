@@ -66,34 +66,28 @@
 
   .ambient-smoke{
     position:fixed;
-    left:0;
-    right:0;
-    bottom:0;
-    height:65vh;
+    inset:0;
     pointer-events:none;
-    z-index:30;
+    z-index:3;
     overflow:hidden;
     mix-blend-mode:screen;
   }
-  .ambient-smoke .wisp{
+  .ambient-smoke .haze{
     position:absolute;
-    bottom:-8%;
-    width:34px;
-    height:34px;
     border-radius:50%;
-    background:radial-gradient(circle, rgba(238,231,218,0.6) 0%, rgba(238,231,218,0) 72%);
-    filter:blur(6px);
+    background:radial-gradient(circle, rgba(238,205,140,0.5) 0%, rgba(212,175,106,0.22) 45%, rgba(184,146,63,0) 75%);
+    filter:blur(70px);
     opacity:0;
-    animation-name:ambient-puff-rise;
-    animation-timing-function:ease-out;
+    animation-name:haze-drift;
+    animation-timing-function:ease-in-out;
     animation-iteration-count:infinite;
   }
-  @keyframes ambient-puff-rise{
-    0%{ transform:translate(0,0) scale(0.5); opacity:0; filter:blur(6px); }
-    10%{ opacity:var(--peak-opacity, 0.38); }
-    40%{ transform:translate(calc(var(--drift, 30px) * 0.4), -30vh) scale(1.3); filter:blur(9px); }
-    70%{ opacity:calc(var(--peak-opacity, 0.38) * 0.55); transform:translate(calc(var(--drift, 30px) * 0.7), -55vh) scale(2); filter:blur(13px); }
-    100%{ transform:translate(var(--drift, 30px), -76vh) scale(2.6); opacity:0; filter:blur(17px); }
+  @keyframes haze-drift{
+    0%{ transform:translate(0,0) scale(1); opacity:0; }
+    15%{ opacity:var(--peak-opacity, 0.5); }
+    50%{ transform:translate(var(--driftx, 60px), var(--drifty, -40px)) scale(1.25); opacity:calc(var(--peak-opacity, 0.5) * 0.85); }
+    85%{ opacity:calc(var(--peak-opacity, 0.5) * 0.4); }
+    100%{ transform:translate(calc(var(--driftx, 60px) * 1.7), calc(var(--drifty, -40px) * 1.7)) scale(0.9); opacity:0; }
   }
   @media (prefers-reduced-motion:reduce){
     .ambient-smoke{ display:none; }
@@ -279,108 +273,31 @@
     top:36%;
     width:640px;
     height:640px;
-    transform:translate(-50%,-50%);
-    background:radial-gradient(circle, rgba(201,162,75,0.3) 0%, rgba(181,86,58,0.14) 34%, rgba(14,11,9,0) 68%);
-    filter:blur(6px);
-    animation:flicker 6s ease-in-out infinite;
-    pointer-events:none;
-    mix-blend-mode:screen;
+    display:none;
   }
-  @keyframes flicker{
-    0%,100%{ opacity:0.85; transform:translate(-50%,-50%) scale(1); }
-    30%{ opacity:1; transform:translate(-49%,-51%) scale(1.04); }
-    55%{ opacity:0.78; transform:translate(-51%,-49%) scale(0.98); }
-    80%{ opacity:0.95; transform:translate(-50%,-50%) scale(1.02); }
-  }
-  @media (prefers-reduced-motion:reduce){ .flame-glow{ animation:none; } }
 
-  .candle{
-    position:relative;
-    display:inline-block;
-    width:56px;
-    height:44px;
-    margin-bottom:1.6rem;
-  }
-  .candle .wick{
-    position:absolute;
-    left:50%;
-    bottom:0;
-    width:2px;
-    height:9px;
-    background:#2a2018;
-    transform:translateX(-50%);
-    border-radius:1px;
-  }
-  .candle .flame-outer{
-    position:absolute;
-    left:50%;
-    bottom:8px;
-    width:13px;
-    height:36px;
-    background:linear-gradient(180deg, #fffaf0 0%, #ffe9b8 28%, var(--gold-soft) 55%, var(--gold) 82%, var(--gold-deep) 100%);
-    border-radius:50% 50% 50% 50% / 72% 72% 28% 28%;
-    transform-origin:50% 100%;
-    transform:translateX(-50%) rotate(-1.5deg);
-    filter:blur(0.3px);
-    animation:flame-flicker-outer 3.4s ease-in-out infinite;
-  }
-  .candle .flame-inner{
-    position:absolute;
-    left:50%;
-    bottom:10px;
-    width:5px;
-    height:16px;
-    background:linear-gradient(180deg, #fffdf6 0%, #fff2cf 60%, rgba(255,242,207,0) 100%);
-    border-radius:50% 50% 50% 50% / 74% 74% 26% 26%;
-    transform-origin:50% 100%;
-    transform:translateX(-50%);
-    animation:flame-flicker-inner 2.5s ease-in-out infinite;
-  }
-  @keyframes flame-flicker-outer{
-    0%,100%{ transform:translateX(-50%) rotate(-1.5deg) scale(1,1); }
-    26%{ transform:translateX(-50%) rotate(1.2deg) scale(1.02,0.985); }
-    52%{ transform:translateX(-51%) rotate(-2.2deg) scale(0.98,1.02); }
-    77%{ transform:translateX(-49%) rotate(1.5deg) scale(1.015,0.99); }
-  }
-  @keyframes flame-flicker-inner{
-    0%,100%{ transform:translateX(-50%) scaleY(1); opacity:0.94; }
-    35%{ transform:translateX(-50.5%) scaleY(1.04); opacity:1; }
-    65%{ transform:translateX(-49.5%) scaleY(0.96); opacity:0.9; }
-  }
-  .candle .smoke{
-    position:absolute;
-    left:50%;
-    bottom:40px;
-    width:15px;
-    height:15px;
-    border-radius:50%;
-    background:radial-gradient(circle, rgba(232,224,210,0.55) 0%, rgba(232,224,210,0) 72%);
-    filter:blur(3px);
-    opacity:0;
+  /* ---------- page-wide candlelight ---------- */
+  .candlelight{
+    position:fixed;
+    inset:0;
+    z-index:2;
     pointer-events:none;
+    mix-blend-mode:overlay;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% -8%, rgba(238,205,140,0.55) 0%, rgba(238,205,140,0) 60%),
+      radial-gradient(ellipse 60% 90% at 8% 40%, rgba(184,146,63,0.28) 0%, rgba(184,146,63,0) 65%),
+      radial-gradient(ellipse 60% 90% at 94% 65%, rgba(184,146,63,0.22) 0%, rgba(184,146,63,0) 65%);
+    animation:candlelight-breathe 7s ease-in-out infinite;
   }
-  .candle .smoke:nth-child(4){ animation:smoke-rise-a 4.5s ease-out infinite; }
-  .candle .smoke:nth-child(5){ animation:smoke-rise-b 5.2s ease-out 1.6s infinite; }
-  .candle .smoke:nth-child(6){ animation:smoke-rise-c 4.8s ease-out 3.1s infinite; }
-  @keyframes smoke-rise-a{
-    0%{ transform:translateX(-50%) translateY(0) scale(0.5); opacity:0; }
-    14%{ opacity:0.5; }
-    100%{ transform:translateX(-30%) translateY(-85px) scale(1.9); opacity:0; }
+  @keyframes candlelight-breathe{
+    0%,100%{ opacity:0.75; }
+    18%{ opacity:1; }
+    34%{ opacity:0.6; }
+    52%{ opacity:0.92; }
+    68%{ opacity:0.7; }
+    84%{ opacity:0.95; }
   }
-  @keyframes smoke-rise-b{
-    0%{ transform:translateX(-50%) translateY(0) scale(0.4); opacity:0; }
-    16%{ opacity:0.45; }
-    100%{ transform:translateX(-68%) translateY(-95px) scale(2.1); opacity:0; }
-  }
-  @keyframes smoke-rise-c{
-    0%{ transform:translateX(-50%) translateY(0) scale(0.55); opacity:0; }
-    14%{ opacity:0.4; }
-    100%{ transform:translateX(-42%) translateY(-78px) scale(1.7); opacity:0; }
-  }
-  @media (prefers-reduced-motion:reduce){
-    .candle .flame-outer, .candle .flame-inner, .candle .smoke{ animation:none; opacity:1; }
-    .candle .smoke{ display:none; }
-  }
+  @media (prefers-reduced-motion:reduce){ .candlelight{ animation:none; opacity:0.8; } }
 
   .hero h1{
     position:relative;
@@ -748,17 +665,13 @@
 
 <div class="mockup-tag">Concept homepage — for review with Stir and Mixxes · not the live site</div>
 
+<div class="candlelight" aria-hidden="true"></div>
 <div class="ambient-smoke" aria-hidden="true">
-  <div class="wisp" style="left:3%; width:30px; height:30px; animation-duration:14s; animation-delay:-2s; --drift:70px; --peak-opacity:0.42;"></div>
-  <div class="wisp" style="left:11%; width:22px; height:22px; animation-duration:11s; animation-delay:-6s; --drift:-50px; --peak-opacity:0.34;"></div>
-  <div class="wisp" style="left:22%; width:40px; height:40px; animation-duration:17s; animation-delay:-10s; --drift:40px; --peak-opacity:0.46;"></div>
-  <div class="wisp" style="left:34%; width:24px; height:24px; animation-duration:12s; animation-delay:-3s; --drift:-65px; --peak-opacity:0.3;"></div>
-  <div class="wisp" style="left:45%; width:32px; height:32px; animation-duration:15s; animation-delay:-8s; --drift:55px; --peak-opacity:0.4;"></div>
-  <div class="wisp" style="left:56%; width:20px; height:20px; animation-duration:10s; animation-delay:-1s; --drift:-42px; --peak-opacity:0.32;"></div>
-  <div class="wisp" style="left:66%; width:38px; height:38px; animation-duration:16s; animation-delay:-12s; --drift:60px; --peak-opacity:0.44;"></div>
-  <div class="wisp" style="left:76%; width:26px; height:26px; animation-duration:13s; animation-delay:-5s; --drift:-48px; --peak-opacity:0.35;"></div>
-  <div class="wisp" style="left:86%; width:34px; height:34px; animation-duration:14.5s; animation-delay:-9s; --drift:58px; --peak-opacity:0.4;"></div>
-  <div class="wisp" style="left:94%; width:22px; height:22px; animation-duration:11.5s; animation-delay:-4s; --drift:-38px; --peak-opacity:0.3;"></div>
+  <div class="haze" style="left:-8%; top:8%; width:52vw; height:52vw; animation-duration:38s; animation-delay:-4s; --driftx:8vw; --drifty:6vh; --peak-opacity:0.5;"></div>
+  <div class="haze" style="right:-12%; top:38%; width:60vw; height:60vw; animation-duration:44s; animation-delay:-20s; --driftx:-7vw; --drifty:-5vh; --peak-opacity:0.42;"></div>
+  <div class="haze" style="left:18%; top:68%; width:46vw; height:46vw; animation-duration:34s; animation-delay:-10s; --driftx:5vw; --drifty:-7vh; --peak-opacity:0.46;"></div>
+  <div class="haze" style="right:12%; top:2%; width:38vw; height:38vw; animation-duration:30s; animation-delay:-16s; --driftx:-6vw; --drifty:8vh; --peak-opacity:0.36;"></div>
+  <div class="haze" style="left:40%; top:30%; width:44vw; height:44vw; animation-duration:41s; animation-delay:-26s; --driftx:6vw; --drifty:6vh; --peak-opacity:0.4;"></div>
 </div>
 
 <header class="site">
@@ -786,14 +699,6 @@
 <section class="hero" id="top">
   <div class="hero-copy">
     <div class="flame-glow" aria-hidden="true"></div>
-    <div class="candle" aria-hidden="true">
-      <div class="wick"></div>
-      <div class="flame-outer"></div>
-      <div class="flame-inner"></div>
-      <div class="smoke"></div>
-      <div class="smoke"></div>
-      <div class="smoke"></div>
-    </div>
     <h1>Stirred with intention.<span>Poured with love.</span></h1>
     <p class="sub">Hand‑poured, small‑batch soy candles, reed diffusers and gifts from a proudly Black‑owned family business — crafted to fill a room, and a moment, with warmth.</p>
     <div class="cta-row">
